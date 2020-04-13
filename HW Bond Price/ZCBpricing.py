@@ -46,7 +46,6 @@ date = valuation.strftime("%Y%m%d")
 
 # 已計息天數 (annual)
 accDays = DayCount30_360([x for x in accuralDates if x.date() < valuation.date()][-1], valuation)
-# (valuation - [x for x in accuralDates if x.date() < valuation.date()][-1]).days
 
 #!!! yield curve data
 yc = pd.read_excel(date+' yield curve.xlsx')
@@ -60,11 +59,8 @@ R = fitCurve(accT)
 
 # 計算債券價格 np.pv為連續複利
 V = FaceValue * np.exp(-R[-1]*accT[-1])
-# V = FaceValue * pow(1+R[-1], -accT[-1])
-# V = FaceValue * np.pv(R[-1], accT[-1], 0, -1)
 for i in range(len(accT)):
     V += cashflow * np.exp(-R[i]*accT[i])
-    # V += cashflow * pow(1+R[i], -accT[i])
 
 # Accrued Interest
 accI = round(accDays * cashflow, 0)
@@ -76,14 +72,7 @@ print('error =', abs(MTM-V)/MTM)
 '''
 MTM=1147710000
 
-// slinear
-
-discrete:
-value = 1146297482.8923845
-error = 0.014291546980975369
-
-continuous:
-value = 1143850987.734211
-error = 0.01215991515919673
+value = 1149918167.0
+error = 0.017507544325801306
 '''
 
