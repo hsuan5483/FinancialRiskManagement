@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 @author: Pei-Hsuan Hsu
-
-Email: amyhsu0619@gmail.com
 """
 
 import os
