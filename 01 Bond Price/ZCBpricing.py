@@ -48,7 +48,7 @@ accDays = DayCount30_360([x for x in accuralDates if x.date() < valuation.date()
 #!!! yield curve data
 yc = pd.read_excel(date+' yield curve.xlsx')
 
-# 使用cubic spline配適yield curve
+# 使用線性差補法計算殖利率
 fitCurve = interp1d(yc.iloc[:, 0], yc.iloc[:, 1])
 
 accuralDates = [x for x in accuralDates if x.date() > valuation.date()]
