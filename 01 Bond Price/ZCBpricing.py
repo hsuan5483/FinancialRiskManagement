@@ -55,7 +55,7 @@ accuralDates = [x for x in accuralDates if x.date() > valuation.date()]
 accT = [DayCount30_360(valuation, x) for x in accuralDates]
 R = fitCurve(accT)
 
-# 計算債券價格 np.pv為連續複利
+# 計算債券價格
 V = FaceValue * np.exp(-R[-1]*accT[-1])
 for i in range(len(accT)):
     V += cashflow * np.exp(-R[i]*accT[i])
